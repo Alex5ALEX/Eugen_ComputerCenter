@@ -1,0 +1,6 @@
+@ComputerCenterServer_HostAddress = http://localhost:5287
+
+GET {{ComputerCenterServer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -3,20 +3,20 @@ using ComputerCenterClient.Logic;
 using ComputerCenterClient.Models;
 using System.Windows.Forms;
 
-namespace ComputerCenterClient.View.CustomerView;
+namespace ComputerCenterClient.View.ServicesView;
 
-public partial class CustomerControl : UserControl
+public partial class ServicesControl : UserControl
 {
     private MainForm mainForm;
-    public CustomerController CustomerController { get; set; }
-    private CustomerAdd customerAdd;
+    public ServicesController ServicesController { get; set; }
+    private ServicesAdd servicesAdd;
 
-    public List<Customer> customers { get; set; }
-    public Customer choisedCustomer { get; set; }
+    public List<Services> services { get; set; }
+    public Services choisedServices { get; set; }
 
 
 
-    public CustomerControl(MainForm mainForm)
+    public ServicesControl(MainForm mainForm)
     {
         this.mainForm = mainForm;
 
@@ -33,20 +33,20 @@ public partial class CustomerControl : UserControl
 
     private void InitData()
     {
-        choisedCustomer = new Customer();
-        CustomerController = new CustomerController(mainForm.httpClient);
-        customerAdd = new CustomerAdd(this);
+        choisedServices = new Services();
+        ServicesController = new ServicesController(mainForm.httpClient);
+        servicesAdd = new ServicesAdd(this);
     }
 
     public async void UpdateData()
     {
         flowLayoutPanel1.Controls.Clear();
 
-        customers = await CustomerController.GetAllCustomersAsync();
+        services = await ServicesController.GetAllServicesAsync();
 
-        foreach (var customer in customers)
+        foreach (var serv in services)
         {
-            flowLayoutPanel1.Controls.Add(new CustomerRow(this, customer));
+            flowLayoutPanel1.Controls.Add(new ServicesRow(this, serv));
         }
     }
 
@@ -62,16 +62,16 @@ public partial class CustomerControl : UserControl
     {
         //pictureBox1.Visible = false;
         groupBoxAction.Controls.Clear();
-        groupBoxAction.Controls.Add(customerAdd);
+        groupBoxAction.Controls.Add(servicesAdd);
     }
 
     private void Edit(object? sender, EventArgs e)
     {
-        if (choisedCustomer.Id == Guid.Empty) { return; }
+        if (choisedServices.Id == Guid.Empty) { return; }
 
         //pictureBox1.Visible = false;
         groupBoxAction.Controls.Clear();
-        groupBoxAction.Controls.Add(new CustomerEdit(this, choisedCustomer));
+        groupBoxAction.Controls.Add(new ServicesEdit(this, choisedServices));
     }
 
 

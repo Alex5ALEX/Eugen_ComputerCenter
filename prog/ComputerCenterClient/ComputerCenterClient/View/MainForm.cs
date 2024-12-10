@@ -1,4 +1,8 @@
 ﻿using ComputerCenterClient.View.CustomerView;
+using ComputerCenterClient.View.ServicesView;
+using ComputerCenterClient.View.ProviderView;
+using ComputerCenterClient.View.ManufactureView;
+using ComputerCenterClient.View.ProductView;
 
 namespace ComputerCenterClient.View;
 
@@ -8,6 +12,10 @@ public partial class MainForm : Form
 
     
     CustomerControl customerControl;
+    ServicesControl servicesControl;
+    ProviderControl providerControl;
+    ManufactureControl manufactureControl;
+    ProductControl productControl;
     /*EmployeeControl employeeControl;
     OrderControl orderControl;
     ProductControl productControl;
@@ -28,6 +36,10 @@ public partial class MainForm : Form
         labelMenu.Click += HideMenuButton;
         
         customerOption.Click += InitCustomerControl;
+        servicesOption.Click += InitServicesControl;
+        providerOption.Click += InitProviderControl;
+        manufactureOption.Click += InitManufactureControl;
+        productOption.Click += InitProductControl;
         /*
         employeeOption.Click += InitEmployeeControl;
         orderOption.Click += InitOrderControl;
@@ -43,15 +55,26 @@ public partial class MainForm : Form
     {
         httpClient = new HttpClient();
         
-        customerControl = new CustomerControl(this);/*
+        customerControl = new CustomerControl(this);
+        servicesControl = new ServicesControl(this);
+        providerControl = new ProviderControl(this);
+        manufactureControl = new ManufactureControl(this);
+        productControl = new ProductControl(this);
+        /*
         employeeControl = new EmployeeControl(this);
         orderControl = new OrderControl(this);
         productControl = new ProductControl(this);
         providerControl = new ProviderControl(this);
         supplyControl = new SupplyControl(this);
-        reportControl = new ReportControl(this);
+        reportControl = new ReportControl(this);*/
 
         Controls.Add(customerControl);
+        Controls.Add(servicesControl);
+        Controls.Add(providerControl);
+        Controls.Add(manufactureControl);
+        Controls.Add(productControl);
+
+        /*
         Controls.Add(employeeControl);
         Controls.Add(orderControl);
         Controls.Add(productControl);
@@ -59,7 +82,7 @@ public partial class MainForm : Form
         Controls.Add(supplyControl);
         Controls.Add(reportControl);*/
 
-        //HideMainControls();
+        HideMainControls();
         HideMenuControl();
     }
 
@@ -69,6 +92,31 @@ public partial class MainForm : Form
     {
         HideAllControls();
         customerControl.Visible = true;
+    }
+    private void InitServicesControl(object sender, EventArgs e)
+    {
+        HideAllControls();
+        servicesControl.Visible = true;
+    }
+
+    private void InitProviderControl(object sender, EventArgs e)
+    {
+        HideAllControls();
+        providerControl.Visible = true;
+    }
+
+    private void InitManufactureControl(object sender, EventArgs e)
+    {
+        HideAllControls();
+        manufactureControl.Visible = true;
+    }
+
+
+
+    private void InitProductControl(object sender, EventArgs e)
+    {
+        HideAllControls();
+        productControl.Visible = true;
     }
     /*
     private void InitEmployeeControl(object sender, EventArgs e)
@@ -83,17 +131,7 @@ public partial class MainForm : Form
         orderControl.Visible = true;
     }
 
-    private void InitProductControl(object sender, EventArgs e)
-    {
-        HideAllControls();
-        productControl.Visible = true;
-    }
 
-    private void InitProviderControl(object sender, EventArgs e)
-    {
-        HideAllControls();
-        providerControl.Visible = true;
-    }
 
     private void InitSupplyControl(object sender, EventArgs e)
     {
@@ -110,11 +148,12 @@ public partial class MainForm : Form
     //controls
 
 
-    
+
     private void HideAllControls()
     {
         HideMenuControl();
         buttonMenu.Visible = false;
+        pictureBox1.Visible = false;
 
         HideMainControls();
     }
@@ -122,7 +161,12 @@ public partial class MainForm : Form
 
     private void HideMainControls()
     {
-        customerControl.Visible = false;/*
+        customerControl.Visible = false;
+        servicesControl.Visible = false;
+        providerControl.Visible = false;
+        manufactureControl.Visible = false;
+        productControl.Visible = false;
+        /*
         employeeControl.Visible = false;
         orderControl.Visible = false;
         productControl.Visible = false;

@@ -20,7 +20,7 @@ public class ManufactureController
     public ManufactureController(HttpClient htttpClient)
     {
         this.httpClient = htttpClient;
-        url = new Uri("https://localhost:7036/api/provider");
+        url = new Uri("https://localhost:7036/api/manufacture");
     }
 
 

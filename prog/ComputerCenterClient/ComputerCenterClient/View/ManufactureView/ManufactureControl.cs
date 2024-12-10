@@ -3,20 +3,20 @@ using ComputerCenterClient.Logic;
 using ComputerCenterClient.Models;
 using System.Windows.Forms;
 
-namespace ComputerCenterClient.View.CustomerView;
+namespace ComputerCenterClient.View.ManufactureView;
 
-public partial class CustomerControl : UserControl
+public partial class ManufactureControl : UserControl
 {
     private MainForm mainForm;
-    public CustomerController CustomerController { get; set; }
-    private CustomerAdd customerAdd;
+    public ManufactureController ManufactureController { get; set; }
+    private ManufactureAdd manufactureAdd;
 
-    public List<Customer> customers { get; set; }
-    public Customer choisedCustomer { get; set; }
+    public List<Manufacture> manufacture { get; set; }
+    public Manufacture choisedManufacture { get; set; }
 
 
 
-    public CustomerControl(MainForm mainForm)
+    public ManufactureControl(MainForm mainForm)
     {
         this.mainForm = mainForm;
 
@@ -33,20 +33,20 @@ public partial class CustomerControl : UserControl
 
     private void InitData()
     {
-        choisedCustomer = new Customer();
-        CustomerController = new CustomerController(mainForm.httpClient);
-        customerAdd = new CustomerAdd(this);
+        choisedManufacture = new Manufacture();
+        ManufactureController = new ManufactureController(mainForm.httpClient);
+        manufactureAdd = new ManufactureAdd(this);
     }
 
     public async void UpdateData()
     {
         flowLayoutPanel1.Controls.Clear();
 
-        customers = await CustomerController.GetAllCustomersAsync();
+        manufacture = await ManufactureController.GetAllManufacturesAsync();
 
-        foreach (var customer in customers)
+        foreach (var man in manufacture)
         {
-            flowLayoutPanel1.Controls.Add(new CustomerRow(this, customer));
+            flowLayoutPanel1.Controls.Add(new ManufactureRow(this, man));
         }
     }
 
@@ -62,16 +62,16 @@ public partial class CustomerControl : UserControl
     {
         //pictureBox1.Visible = false;
         groupBoxAction.Controls.Clear();
-        groupBoxAction.Controls.Add(customerAdd);
+        groupBoxAction.Controls.Add(manufactureAdd);
     }
 
     private void Edit(object? sender, EventArgs e)
     {
-        if (choisedCustomer.Id == Guid.Empty) { return; }
+        if (choisedManufacture.Id == Guid.Empty) { return; }
 
         //pictureBox1.Visible = false;
         groupBoxAction.Controls.Clear();
-        groupBoxAction.Controls.Add(new CustomerEdit(this, choisedCustomer));
+        groupBoxAction.Controls.Add(new ManufactureEdit(this, choisedManufacture));
     }
 
 

@@ -1,6 +1,6 @@
-﻿namespace ComputerCenterClient.View.CustomerView
+﻿namespace ComputerCenterClient.View.ManufactureView
 {
-    partial class CustomerControl
+    partial class ManufactureControl
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -102,11 +102,11 @@
             labelPage.Font = new Font("Segoe UI", 30F);
             labelPage.Location = new Point(89, 5);
             labelPage.Name = "labelPage";
-            labelPage.Size = new Size(211, 54);
+            labelPage.Size = new Size(248, 54);
             labelPage.TabIndex = 5;
-            labelPage.Text = "Customers";
+            labelPage.Text = "Manufacture";
             // 
-            // CustomerControl
+            // ManufactureControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -117,7 +117,7 @@
             Controls.Add(buttonAdd);
             Controls.Add(buttonEdit);
             Controls.Add(buttonMenu);
-            Name = "CustomerControl";
+            Name = "ManufactureControl";
             Size = new Size(1260, 680);
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);

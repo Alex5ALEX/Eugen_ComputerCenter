@@ -12,9 +12,6 @@
     <Folder Include="Logic\" />
     <Folder Include="res\images\" />
     <Folder Include="View\OrderView\" />
-    <Folder Include="View\ServicesView\" />
-    <Folder Include="View\ProductView\" />
-    <Folder Include="View\ManufactureView\" />
     <Folder Include="View\ProviderView\" />
     <Folder Include="View\ReportView\" />
   </ItemGroup>

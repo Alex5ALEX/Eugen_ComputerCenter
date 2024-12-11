@@ -11,13 +11,12 @@
   <ItemGroup>
     <Folder Include="Logic\" />
     <Folder Include="res\images\" />
-    <Folder Include="View\OrderView\" />
     <Folder Include="View\ProviderView\" />
-    <Folder Include="View\ReportView\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="WinForms.DataVisualization" Version="1.9.2" />
   </ItemGroup>
 
   <ItemGroup>

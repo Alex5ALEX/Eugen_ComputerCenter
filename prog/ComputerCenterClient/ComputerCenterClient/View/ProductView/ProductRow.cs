@@ -32,17 +32,39 @@ public partial class ProductRow : UserControl
 
         
         groupBox1.Click += change_selected_Id;
+        groupBox2.Click += change_selected_Id;
+        groupBox3.Click += change_selected_Id;
         labelName.Click += change_selected_Id;
         labelNameText.Click += change_selected_Id;
         labelPrice.Click += change_selected_Id;
         labelPriceText.Click += change_selected_Id;
+        label1.Click += change_selected_Id;
+        label2.Click += change_selected_Id;
+        label3.Click += change_selected_Id;
+        label4.Click += change_selected_Id;
+        label5.Click += change_selected_Id;
+        label6.Click += change_selected_Id;
+        label7.Click += change_selected_Id;
+        label8.Click += change_selected_Id;
+        label9.Click += change_selected_Id;
+        label10.Click += change_selected_Id;
     }
 
 
-    private void InitializeData()
+    private async void InitializeData()
     {
         labelNameText.Text = product.Name;
         labelPriceText.Text = product.Price.ToString();
+
+        Provider provider = await mainController.providerController.GetProviderById(product.Id_Provider);
+        Manufacture manufacture= await mainController.manufactureController.GetManufactureById(product.Id_Manufacture);
+
+        label2.Text = provider.Company;
+        label3.Text = provider.ContactPerson;
+        label5.Text = provider.Phone;
+        label7.Text = provider.Email;
+
+        label9.Text = manufacture.Company;
     }
 
 

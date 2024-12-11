@@ -35,7 +35,9 @@
             groupBoxList = new GroupBox();
             groupBoxAction = new GroupBox();
             buttonMenu = new Button();
+            pictureBox1 = new PictureBox();
             groupBoxList.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // labelMenuName
@@ -105,11 +107,22 @@
             buttonMenu.Text = "Menu";
             buttonMenu.UseVisualStyleBackColor = false;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = Properties.Resources.provider;
+            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox1.Location = new Point(20, 90);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(300, 300);
+            pictureBox1.TabIndex = 12;
+            pictureBox1.TabStop = false;
+            // 
             // ProviderControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
+            Controls.Add(pictureBox1);
             Controls.Add(buttonEdit);
             Controls.Add(buttonAddNew);
             Controls.Add(groupBoxList);
@@ -119,6 +132,7 @@
             Name = "ProviderControl";
             Size = new Size(1260, 680);
             groupBoxList.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -132,5 +146,6 @@
         private Button buttonMenu;
         private GroupBox groupBoxList;
         private GroupBox groupBoxAction;
+        private PictureBox pictureBox1;
     }
 }

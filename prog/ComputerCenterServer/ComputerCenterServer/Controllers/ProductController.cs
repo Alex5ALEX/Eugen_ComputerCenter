@@ -72,6 +72,8 @@ public class ProductController : Controller
         product.Type = productGet.Type;
         product.Description = productGet.Description;
         product.Price = productGet.Price;
+        product.Id_Manufacture = productGet.Id_Manufacture;
+        product.Id_Provider = productGet.Id_Provider;
 
         _context.SaveChanges();
 

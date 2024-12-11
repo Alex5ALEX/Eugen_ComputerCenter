@@ -97,7 +97,7 @@ public class PurchasedProductController
     }
 
 
-    public async Task<List<PurchasedProduct>> GetPurchasedProductsByIdServices(Guid Id)
+    public async Task<List<PurchasedProduct>> GetPurchasedProductsByIdProduct(Guid Id)
     {
         List<PurchasedProduct> compaund = new List<PurchasedProduct>();
         string content;

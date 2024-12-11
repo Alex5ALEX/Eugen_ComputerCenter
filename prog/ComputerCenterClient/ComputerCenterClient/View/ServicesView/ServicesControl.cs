@@ -55,12 +55,12 @@ public partial class ServicesControl : UserControl
     public void HideActionGroupBox()
     {
         groupBoxAction.Controls.Clear();
-        //pictureBox1.Visible = true;
+        pictureBox1.Visible = true;
     }
 
     private void AddNew(object? sender, EventArgs e)
     {
-        //pictureBox1.Visible = false;
+        pictureBox1.Visible = false;
         groupBoxAction.Controls.Clear();
         groupBoxAction.Controls.Add(servicesAdd);
     }
@@ -69,7 +69,7 @@ public partial class ServicesControl : UserControl
     {
         if (choisedServices.Id == Guid.Empty) { return; }
 
-        //pictureBox1.Visible = false;
+        pictureBox1.Visible = false;
         groupBoxAction.Controls.Clear();
         groupBoxAction.Controls.Add(new ServicesEdit(this, choisedServices));
     }

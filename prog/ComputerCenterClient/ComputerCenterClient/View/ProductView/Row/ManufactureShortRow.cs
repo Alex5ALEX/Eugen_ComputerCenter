@@ -36,6 +36,25 @@ public partial class ManufactureShortRow : UserControl
         label4.Click += Select_add;
     }
 
+    public ManufactureShortRow(ProductEdit productEdit,Manufacture manufacture)
+    {
+        this.manufacture = manufacture;
+        this.productEdit = productEdit;
+
+        InitializeComponent();
+        InitData();
+
+
+        groupBox1.Click += Select_edit;
+        label1.Click += Select_edit;
+        label2.Click += Select_edit;
+        label3.Click += Select_edit;
+        label4.Click += Select_edit;
+    }
+
+
+
+
 
     private void InitData()
     {
@@ -56,5 +75,13 @@ public partial class ManufactureShortRow : UserControl
         productAdd.choised_Manufacture = manufacture;
         productAdd.Show_Manufacture();
     }
+
+
+    private void Select_edit(object sender, EventArgs e)
+    {
+        productEdit.choised_Manufacture = manufacture;
+        productEdit.Show_Manufacture();
+    }
+
 
 }

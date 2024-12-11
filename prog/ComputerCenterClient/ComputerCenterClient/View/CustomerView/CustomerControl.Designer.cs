@@ -35,7 +35,9 @@
             groupBox1 = new GroupBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             labelPage = new Label();
+            pictureBox1 = new PictureBox();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // buttonMenu
@@ -106,11 +108,22 @@
             labelPage.TabIndex = 5;
             labelPage.Text = "Customers";
             // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = Properties.Resources.Client;
+            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox1.Location = new Point(20, 90);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(300, 300);
+            pictureBox1.TabIndex = 6;
+            pictureBox1.TabStop = false;
+            // 
             // CustomerControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
+            Controls.Add(pictureBox1);
             Controls.Add(labelPage);
             Controls.Add(groupBox1);
             Controls.Add(groupBoxAction);
@@ -120,6 +133,7 @@
             Name = "CustomerControl";
             Size = new Size(1260, 680);
             groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -133,5 +147,6 @@
         private GroupBox groupBox1;
         private Label labelPage;
         private FlowLayoutPanel flowLayoutPanel1;
+        private PictureBox pictureBox1;
     }
 }

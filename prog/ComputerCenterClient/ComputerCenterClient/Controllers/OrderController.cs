@@ -18,7 +18,7 @@ public class OrderController
     public OrderController(HttpClient htttpClient)
     {
         this.httpClient = htttpClient;
-        url = new Uri("https://localhost:7262/api/order");
+        url = new Uri("https://localhost:7036/api/order");
 
     }
 

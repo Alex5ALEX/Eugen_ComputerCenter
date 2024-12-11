@@ -103,7 +103,7 @@ public class PurchasedServicesController
 
         try
         {
-            var response = await httpClient.GetAsync(url + $"/by_product/{Id}");
+            var response = await httpClient.GetAsync(url + $"/by_services/{Id}");
 
             response.EnsureSuccessStatusCode(); // Check for a successful status
 

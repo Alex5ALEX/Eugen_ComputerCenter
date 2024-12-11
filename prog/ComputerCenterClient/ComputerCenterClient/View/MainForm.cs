@@ -3,6 +3,8 @@ using ComputerCenterClient.View.ServicesView;
 using ComputerCenterClient.View.ProviderView;
 using ComputerCenterClient.View.ManufactureView;
 using ComputerCenterClient.View.ProductView;
+using ComputerCenterClient.View.OrderView;
+using ComputerCenterClient.View.ReportView;
 
 namespace ComputerCenterClient.View;
 
@@ -16,6 +18,8 @@ public partial class MainForm : Form
     ProviderControl providerControl;
     ManufactureControl manufactureControl;
     ProductControl productControl;
+    OrderControl orderControl;
+    ReportControl reportControl;
     /*EmployeeControl employeeControl;
     OrderControl orderControl;
     ProductControl productControl;
@@ -40,13 +44,8 @@ public partial class MainForm : Form
         providerOption.Click += InitProviderControl;
         manufactureOption.Click += InitManufactureControl;
         productOption.Click += InitProductControl;
-        /*
-        employeeOption.Click += InitEmployeeControl;
         orderOption.Click += InitOrderControl;
-        productOption.Click += InitProductControl;
-        providerOption.Click += InitProviderControl;
-        supplyOption.Click += InitSupplyControl;
-        ReportOption.Click += InitReportControl;*/
+        ReportOption.Click += InitReportControl;
     }
 
 
@@ -60,27 +59,16 @@ public partial class MainForm : Form
         providerControl = new ProviderControl(this);
         manufactureControl = new ManufactureControl(this);
         productControl = new ProductControl(this);
-        /*
-        employeeControl = new EmployeeControl(this);
-        orderControl = new OrderControl(this);
-        productControl = new ProductControl(this);
-        providerControl = new ProviderControl(this);
-        supplyControl = new SupplyControl(this);
-        reportControl = new ReportControl(this);*/
+        orderControl = new OrderControl(this);  
+        reportControl = new ReportControl(this);
 
         Controls.Add(customerControl);
         Controls.Add(servicesControl);
         Controls.Add(providerControl);
         Controls.Add(manufactureControl);
         Controls.Add(productControl);
-
-        /*
-        Controls.Add(employeeControl);
         Controls.Add(orderControl);
-        Controls.Add(productControl);
-        Controls.Add(providerControl);
-        Controls.Add(supplyControl);
-        Controls.Add(reportControl);*/
+        Controls.Add(reportControl);
 
         HideMainControls();
         HideMenuControl();
@@ -111,18 +99,10 @@ public partial class MainForm : Form
         manufactureControl.Visible = true;
     }
 
-
-
     private void InitProductControl(object sender, EventArgs e)
     {
         HideAllControls();
         productControl.Visible = true;
-    }
-    /*
-    private void InitEmployeeControl(object sender, EventArgs e)
-    {
-        HideAllControls();
-        employeeControl.Visible = true;
     }
 
     private void InitOrderControl(object sender, EventArgs e)
@@ -131,20 +111,12 @@ public partial class MainForm : Form
         orderControl.Visible = true;
     }
 
-
-
-    private void InitSupplyControl(object sender, EventArgs e)
-    {
-        HideAllControls();
-        supplyControl.Visible = true;
-    }
-
     private void InitReportControl(object sender, EventArgs e)
     {
         HideAllControls();
         reportControl.Visible = true;
     }
-    */
+    
     //controls
 
 
@@ -166,13 +138,8 @@ public partial class MainForm : Form
         providerControl.Visible = false;
         manufactureControl.Visible = false;
         productControl.Visible = false;
-        /*
-        employeeControl.Visible = false;
         orderControl.Visible = false;
-        productControl.Visible = false;
-        providerControl.Visible = false;
-        supplyControl.Visible = false;
-        reportControl.Visible = false;*/
+        reportControl.Visible = false;
     }
 
 

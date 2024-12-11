@@ -55,12 +55,12 @@ public partial class ManufactureControl : UserControl
     public void HideActionGroupBox()
     {
         groupBoxAction.Controls.Clear();
-        //pictureBox1.Visible = true;
+        pictureBox1.Visible = true;
     }
 
     private void AddNew(object? sender, EventArgs e)
     {
-        //pictureBox1.Visible = false;
+        pictureBox1.Visible = false;
         groupBoxAction.Controls.Clear();
         groupBoxAction.Controls.Add(manufactureAdd);
     }
@@ -69,7 +69,7 @@ public partial class ManufactureControl : UserControl
     {
         if (choisedManufacture.Id == Guid.Empty) { return; }
 
-        //pictureBox1.Visible = false;
+        pictureBox1.Visible = false;
         groupBoxAction.Controls.Clear();
         groupBoxAction.Controls.Add(new ManufactureEdit(this, choisedManufacture));
     }

@@ -1,4 +1,6 @@
 using ComputerCenterClient.View;
+using ComputerCenterClient.ViewClient;
+using ComputerCenterClient.ViewReg;
 
 namespace ComputerCenterClient;
 
@@ -10,6 +12,19 @@ internal static class Program
     {
 
         ApplicationConfiguration.Initialize();
-        Application.Run(new MainForm());
+
+
+        RegistrationForm reg = new RegistrationForm();
+        Application.Run(reg);
+
+
+        if (reg.result == "Customer")
+        {
+            Application.Run(new ClientForm(reg.person));
+        }
+        else if (reg.result == "Admin")
+        {
+            Application.Run(new MainForm());
+        }
     }
 }

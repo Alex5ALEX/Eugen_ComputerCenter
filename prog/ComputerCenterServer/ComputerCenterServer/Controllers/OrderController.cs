@@ -40,6 +40,17 @@ public class OrderController : Controller
 
     }
 
+    [HttpGet("id_customer/{id}")]
+    public async Task<IActionResult> GetByIdCustomer(Guid id)
+    {
+        var  orders = await _context.Orders.Where(p => p.Id_Customer == id).ToListAsync();
+
+        if (orders == null) { return NotFound(); }
+
+        return Ok(orders);
+
+    }
+
 
     [HttpPost]
     public async Task<IActionResult> Set(
@@ -89,5 +100,17 @@ public class OrderController : Controller
         _context.SaveChanges();
 
         return Ok("Order deleted");
+    }
+
+    [HttpDelete("customer/{Id}")]
+    public async Task<IActionResult> DeleteByCustomer(Guid Id)
+    {
+        var orders = await _context.Orders.Where(c => c.Id_Customer == Id).ToListAsync();
+        foreach (var order in orders)
+        {
+            _context.Orders.Remove(order);
+        }
+        _context.SaveChanges();
+        return Ok();
     }
 }

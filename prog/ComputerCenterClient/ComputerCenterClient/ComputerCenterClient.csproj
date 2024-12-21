@@ -11,7 +11,7 @@
   <ItemGroup>
     <Folder Include="Logic\" />
     <Folder Include="res\images\" />
-    <Folder Include="View\ProviderView\" />
+    <Folder Include="ViewClient\OrderClientView\Row\" />
   </ItemGroup>
 
   <ItemGroup>

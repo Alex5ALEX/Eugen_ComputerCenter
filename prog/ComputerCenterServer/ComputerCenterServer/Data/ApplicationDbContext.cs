@@ -2,6 +2,7 @@
 using ComputerCenterServer.Models;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace ComputerCenterServer.Data;
 
 public class ApplicationDbContext : DbContext
@@ -10,22 +11,21 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Order> Orders { get; set; }
 
-
     public DbSet<PurchasedProduct> PurchasedProducts { get; set; }
 
     public DbSet<Product> Products { get; set; }
-
 
     public DbSet<PurchasedServices> PurchasedServices { get; set; }
 
     public DbSet<Services> Services { get; set; }
 
-
     public DbSet<Manufacture> Manufactures { get; set; }
 
     public DbSet<Provider> Providers { get; set; }
 
+    public DbSet<Admin> Admins { get; set; }    
 
+    public DbSet<Person> Persons { get; set; } 
 
 
     //настройка строки подключения
@@ -42,6 +42,10 @@ public class ApplicationDbContext : DbContext
     {
         modelBuilder.ApplyConfiguration(new PurchasedProductConfiguration());
         modelBuilder.ApplyConfiguration(new PurchasedServicesConfiguration());
+        modelBuilder.ApplyConfiguration(new InitDBPerson());
+        modelBuilder.ApplyConfiguration(new InitDBAdmin());
+
+
 
         base.OnModelCreating(modelBuilder);
     }

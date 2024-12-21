@@ -2,64 +2,103 @@
 using System.Net.Http.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ComputerCenterClient.DTO;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using ComputerCenterClient.View.CustomerView;
+
 
 namespace ComputerCenterClient.Controllers;
 
 public class CustomerController
 {
     private HttpClient httpClient;
-    private readonly Uri url;
+    private readonly Uri urlCustomer;
+    private readonly Uri urlPerson;
 
 
     public CustomerController(HttpClient httpClient)
     {
         this.httpClient = httpClient;
-        url = new Uri("https://localhost:7036/api/customer");
+        urlCustomer = new Uri("https://localhost:7036/api/customer");
+        urlPerson = new Uri("https://localhost:7036/api/person");
+
     }
 
-
-    public async Task<List<Customer>> GetAllCustomersAsync()
+    public async Task<List<CustomerDTO>> GetAll()
     {
-        List<Customer> customers = new List<Customer>(); // Initialize the list of customers
-        string content;
+        List<CustomerDTO> customers = new List<CustomerDTO>();
 
-        try
-        {
-            var response = await httpClient.GetAsync(url);
 
-            response.EnsureSuccessStatusCode(); // Check for a successful status
+        var response = await httpClient.GetAsync(urlCustomer);
 
-            content = await response.Content.ReadAsStringAsync();
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Ошибка: {ex.Message}");
-            return null; // Return null on error
-        }
+        string content = await response.Content.ReadAsStringAsync();
 
         var contentArray = JArray.Parse(content);
 
-        foreach (var customer in contentArray)
-        {
-            customers.Add(new Customer()
+        foreach (var item in contentArray) {
+            
+            Customer customer = new Customer() 
             {
-                Id = Guid.Parse(customer["id"].ToString()),
-                Name = customer["name"].ToString(),
-                Surname = customer["surname"].ToString(),
-                Phone = customer["phone"].ToString(),
-                Email = customer["email"].ToString(),
-                Address = customer["address"].ToString()
-            });
+                Id = Guid.Parse(item["id"].ToString()),
+                Id_Person = Guid.Parse(item["id_Person"].ToString())
+            };
+
+            var responsePerson = await httpClient.GetAsync($"{urlPerson}/{customer.Id_Person}");
+
+            var contentPerson = await responsePerson.Content.ReadAsStringAsync(); 
+
+            Person person = JsonConvert.DeserializeObject<Person>(contentPerson);
+
+            if (person == null)
+            {
+                Environment.Exit(0);
+            }
+
+            customers.Add(new CustomerDTO(person, customer));
+       
         }
 
-        return customers; // Return the populated list of customers
+
+        return customers;
     }
 
 
-
-    public async Task<Customer> GetCustomerById(Guid Id)
+    public async Task<CustomerDTO> GetById(Guid Id)
     {
-        var response = await httpClient.GetAsync(url + $"/{Id}");
+        var response = await httpClient.GetAsync(urlCustomer + $"/{Id}");
+        //var response = await httpClient.GetAsync(url + $"/{Id.ToString()}");
+
+
+        if (!response.IsSuccessStatusCode)
+        {
+            return new CustomerDTO();
+            //throw new Exception($"Ошибка при получении данных: {response.StatusCode}");
+        }
+
+        var data = await response.Content.ReadAsStringAsync();
+
+        var customer = JsonConvert.DeserializeObject<Customer>(data);
+
+        var responsePerson = await httpClient.GetAsync(urlPerson + $"/{customer.Id_Person}");
+
+        if (!responsePerson.IsSuccessStatusCode)
+        {
+            return new CustomerDTO();
+            //throw new Exception($"Ошибка при получении данных: {response.StatusCode}");
+        }
+
+        data = await responsePerson.Content.ReadAsStringAsync();
+
+        var person = JsonConvert.DeserializeObject<Person>(data);
+
+        return new CustomerDTO(person, customer);
+        
+        
+    }
+
+    public async Task<Customer> GetByIdPerson(Guid Id)
+    {
+        var response = await httpClient.GetAsync(urlCustomer + $"/id_person/{Id}");
         //var response = await httpClient.GetAsync(url + $"/{Id.ToString()}");
 
 
@@ -75,27 +114,49 @@ public class CustomerController
 
         return content;
 
+
     }
 
 
 
-
-
-    public Task<HttpResponseMessage> PostCustomer(Customer customer)
+    public async Task<bool> Post(Person person)
     {
-        return httpClient.PostAsJsonAsync(url, customer);
+        var response = await httpClient.PostAsJsonAsync(urlPerson, person);
+
+
+        if (!response.IsSuccessStatusCode) { return false; }
+        
+        var data = await response.Content.ReadAsStringAsync();
+
+        person = JsonConvert.DeserializeObject<Person>(data);
+
+        
+        
+        
+        Customer customer = new Customer() { Id_Person = person.Id };
+
+        var response1 = await httpClient.PostAsJsonAsync(urlCustomer, customer);
+
+        if (!response1.IsSuccessStatusCode) { return false; }
+
+        return true;
     }
 
 
-    public Task<HttpResponseMessage> PutCustomerById(Customer customer)
+    public async Task<bool> Put(CustomerDTO customer)
     {
-        return httpClient.PutAsJsonAsync($"{url}/{customer.Id.ToString()}", customer);
+        var response = await httpClient.PutAsJsonAsync(urlPerson, customer.Person);
+
+        if (!response.IsSuccessStatusCode) { return false; }
+
+        return true;
     }
 
 
-    public Task<HttpResponseMessage> DelCustomer(Customer customer)
+    public Task<HttpResponseMessage> Del(CustomerDTO customer)
     {
-        return httpClient.DeleteAsync($"{url}/{customer.Id.ToString()}");
+        httpClient.DeleteAsync($"{urlCustomer}/{customer.Customer.Id.ToString()}");
+        return httpClient.DeleteAsync($"{urlPerson}/{customer.Person.Id.ToString()}");
     }
 
 

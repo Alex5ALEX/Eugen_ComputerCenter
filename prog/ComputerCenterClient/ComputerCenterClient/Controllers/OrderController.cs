@@ -57,6 +57,40 @@ public class OrderController
     }
 
 
+    public async Task<List<Order>> GetAllOrdersByIdCustomer(Guid Id)
+    {
+        List<Order> orders = new List<Order>(); // Initialize the list of customers
+        string content;
+
+        try
+        {
+            var response = await httpClient.GetAsync(url + $"/id_customer/{Id}");
+
+            response.EnsureSuccessStatusCode(); // Check for a successful status
+
+            content = await response.Content.ReadAsStringAsync();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Ошибка: {ex.Message}");
+            return null; // Return null on error
+        }
+
+        var contentArray = JArray.Parse(content);
+
+        foreach (var token in contentArray)
+        {
+            orders.Add(new Order()
+            {
+                Id = Guid.Parse(token["id"].ToString()),
+                Date = DateTime.Parse(token["date"].ToString()),
+                Id_Customer = Guid.Parse(token["id_Customer"].ToString()),
+            });
+        }
+
+        return orders;
+    }
+
 
     public async Task<string> GetOrderById(Guid Id)
     {
